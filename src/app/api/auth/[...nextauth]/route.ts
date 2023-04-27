@@ -17,6 +17,11 @@ export const authOptions: NextAuthOptions = {
     signIn: '/auth/signin',
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+
+
+      return true;
+    },
     async session({ session }) {
       /* session 기본 형태 
           => username을 포함시키기 위해 types폴더에 next-auth.d.ts 파일을 생성하여 추가함
