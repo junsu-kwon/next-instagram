@@ -9,6 +9,7 @@ export type User = {
 };
 
 export async function addUser({ id, username, email, name, image }: User) {
+  // 만약 존재하지 않는 경우 INSERT
   return client.createIfNotExists({
     _id: id,
     _type: 'user',
