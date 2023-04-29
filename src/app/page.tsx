@@ -1,17 +1,27 @@
-import PostList from '@/components/PostList';
 import FollowingBar from '@/components/FollowingBar';
-import Profile from '@/components/Profile';
+import PostList from '@/components/PostList';
+import Sidebar from '@/components/SideBar';
+import { authOptions } from './api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+export default async function HomePage() {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+
+  if (!user) {
+    redirect('/auth/signin');
+  }
+
   return (
-    <div className="grid grid-cols-2">
-      <div className="flex flex-col gap-2">
+    <section className="w-full flex flex-col md:flex-row max-w-[850px] p-4">
+      <div className="w-full basis-3/4">
         <FollowingBar />
         <PostList />
       </div>
-      <div>
-        <Profile />
+      <div className="basis-1/4">
+        <Sidebar user={user} />
       </div>
-    </div>
+    </section>
   );
 }

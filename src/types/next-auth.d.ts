@@ -1,10 +1,8 @@
-import NextAuth, { DefaultSession } from 'next-auth';
+import { User } from '@/model/user';
 
 // 기존 DefaultSession에 username을 확장하는 작업
 declare module 'next-auth' {
   interface Session {
-    user: {
-      username: string;
-    } & DefaultSession['user'];
+    user: User;
   }
 }
