@@ -17,7 +17,7 @@ export default function ScrollableBar({
   children: React.ReactNode;
 }) {
   return (
-    <Carousel responsive={responsive}>
+    <Carousel containerClass="w-full" responsive={responsive}>
       {children}
     </Carousel>
   );

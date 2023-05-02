@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation';
 import ColorButton from './ui/ColorButton';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Avatar from './Avatar';
+import { RiseLoader } from 'react-spinners';
 
 const ICON_CLASS =
   'p-1 hover:scale-105 hover:bg-gray-300 hover:rounded-md transition-all duration-300';
@@ -36,7 +37,7 @@ const menu = [
 export default function Navbar() {
   const pathName = usePathname();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const user = session?.user;
 
   return (
@@ -60,7 +61,9 @@ export default function Navbar() {
             </li>
           )}
           <li>
-            {session ? (
+            {status === 'loading' ? (
+              <RiseLoader size={8} color="red" />
+            ) : user ? (
               <ColorButton text="Sign out" onClick={() => signOut()} />
             ) : (
               <ColorButton text="Sign in" onClick={() => signIn()} />

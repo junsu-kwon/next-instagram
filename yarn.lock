@@ -231,6 +231,11 @@
     split2 "^4.1.0"
     throttle-debounce "^5.0.0"
 
+"@sanity/image-url@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-1.0.2.tgz#1ff7259e9bad6bfca4169f21c53a4123f6ac78c3"
+  integrity sha512-C4+jb2ny3ZbMgEkLd7Z3C75DsxcTEoE+axXQJsQ75ou0AKWGdVsP351hqK6mJUUxn5HCSlu3vznoh7Yljye4cQ==
+
 "@sanity/preview-kit@1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@sanity/preview-kit/-/preview-kit-1.4.0.tgz#88e59fc42b713868f4c33cfdc575b5c68671b824"
