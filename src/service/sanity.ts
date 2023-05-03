@@ -1,16 +1,17 @@
-import { createClient } from 'next-sanity';
+import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
   dataset: process.env.SANITY_DATASET,
-  useCdn: false, // cdn에 캐쉬할지 여부
-  apiVersion: '2023-04-27',
-  token: process.env.SANITY_SECRET_TOKEN, // client로 콘텐츠를 업데이트하려는 경우
+  useCdn: false,
+  apiVersion: '2023-03-20',
+  token: process.env.SANITY_SECRET_TOKEN,
 });
 
 const builder = imageUrlBuilder(client);
 
-export function urlFor(source) {
-  return builder.image(source);
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source).width(800).url();
 }

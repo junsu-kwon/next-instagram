@@ -3,7 +3,7 @@ import { authOptions } from '../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 import { getUserByUsername } from '@/service/user';
 
-export async function GET(req: Request) {
+export async function GET() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
@@ -14,5 +14,3 @@ export async function GET(req: Request) {
     .then((data) => NextResponse.json(data))
     .catch(() => {});
 }
-
-export async function POST(req: Request) {}

@@ -1,21 +1,29 @@
 'use client';
-
-import { Post } from '@/model/post';
-import { PropagateLoader } from 'react-spinners';
+import { SimplePost } from '@/model/post';
 import useSWR from 'swr';
+import PostListCard from './PostListCard';
+import GridSpinner from './ui/GridSpinner';
 
-export default function PostList({}) {
-  // 1. 포스트 + 회원 정보를 가져오기
-  const { data, isLoading: loading, error } = useSWR<Post[]>('/api/posts');
-  // 2. 화면에 뿌리기
-  console.log(data);
-  // return loading ? (
-  //   <PropagateLoader size={8} color="red" />
-  // ) : (
-  //   data?.map((post) => (
-  //     <h1 key={post.auther.username}>
-  //       {post.auther.username} {post.comments.comment}
-  //     </h1>
-  //   ))
-  // );
+export default function PostList() {
+  const { data: posts, isLoading: loading } =
+    useSWR<SimplePost[]>('/api/posts');
+
+  return (
+    <section>
+      {loading && (
+        <div className="flex justify-center items-center h-full">
+          <GridSpinner color="red" />
+        </div>
+      )}
+      {posts && (
+        <ul>
+          {posts.map((post, index) => (
+            <li key={post.id} className="mb-4">
+              <PostListCard post={post} priority={index < 2} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
 }
