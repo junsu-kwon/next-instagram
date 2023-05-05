@@ -2,7 +2,7 @@ import SmileIcon from './ui/icons/SmileIcon';
 
 export default function CommentForm() {
   return (
-    <form className='flex items-center px-3 border-t border-neutral-200'>
+    <form className='flex items-center px-3 border-t border-neutral-300'>
       <SmileIcon />
       <input
         className='w-full ml-2 border-none outline-none p-3'
