@@ -1,4 +1,4 @@
-import { client } from './sanity';
+import { client, urlFor } from './sanity';
 
 type OAuthUser = {
   id: string;
@@ -32,5 +32,19 @@ export async function getUserByUsername(username: string) {
       followers[]->{username,image},
       "bookmarks":bookmarks[]->_id
     }`,
+  );
+}
+
+export async function searchUsers(keyword?: string) {
+  const query = keyword
+    ? `&& (name match "${keyword}") || (username match "${keyword}")`
+    : '';
+  return client.fetch(
+    `*[_type =="user" ${query}]{
+      ...,
+      "following": count(following),
+      "followers": count(followers),
+    }
+    `,
   );
 }
