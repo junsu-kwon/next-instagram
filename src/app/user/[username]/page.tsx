@@ -12,5 +12,9 @@ export default async function UserPage({ params: { username } }: Props) {
     notFound();
   }
 
-  return <UserProfile user={user} />;
+  return (
+    <>
+      <UserProfile user={user} />
+    </>
+  );
 }
